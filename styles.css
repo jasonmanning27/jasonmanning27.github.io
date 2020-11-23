@@ -1,0 +1,133 @@
+body {
+    background: black;
+    height: 100vh;
+}
+
+.background {
+    -webkit-animation: breath 3s linear;
+    background-image: url("images/darksidelogo_adjusted.png");
+    height: 100vh;
+    width: 100vw;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+}
+
+main {
+    height: 100vh;
+}
+/* text css */
+a {
+    font-size: 1em;
+    color: white;
+    text-align: center;
+}
+a h2:hover {
+    color: #9d71de;
+}
+a h2:visited {
+    color: #c74c91;
+}
+
+p {
+    font-size: 1.5em;
+    -webkit-animation: breath 2.5s linear;
+    font-family: 'Cardo', sans-serif;
+}
+
+.header {
+    font-weight: bold;
+    font-size: 4em;
+}
+
+.paragraph {
+    padding: 4em;
+    color: white;
+}
+
+h1 {
+    padding-top: 2em;
+    padding-bottom: .5em;
+    text-align: center;
+    font-size: 2em;
+    color: white;
+    -webkit-animation: breath 1s linear;
+    font-family: 'Oswald', sans-serif;
+}
+h2 {
+    text-align: center;
+    color: lightgrey;
+    font-size: 1.5em;
+    -webkit-animation: breath 1s linear;
+    font-family: 'Oswald', sans-serif;
+}
+h3 {
+    text-align: center;
+    font-size: 1em;
+    color: lightgrey;
+    -webkit-animation: breath 1s linear;
+    font-family: 'Oswald', sans-serif;
+}
+
+/* media gallery css */
+iframe {
+    -webkit-animation: breath 2s linear;
+    padding-top: 7em;
+    position: relative;
+    height: 75vh;
+    max-height: 75%;
+    background: black;
+}
+.pictures {
+    width: 80%;
+}
+.gallery .col-sm-12 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5em;
+}
+
+.large {
+    font-size: 4em;
+}
+
+@-webkit-keyframes breath {
+    0%   {  opacity: 0; }
+    50%  {  opacity: .5; }
+    100% {  opacity: 1; }
+}
+/* mobile and narrow screen view */
+@media (max-width: 1080px) {
+    body {
+        background: black; 
+    }
+    .background {
+        background-image: url("images/Darksidemobile_adjusted.png");
+    }
+    iframe {
+        padding: 1em;
+        -webkit-animation: breath 2s linear;
+        position: relative;
+        height: 90%;
+        max-height: 90%;
+    }
+    h1 {
+        padding-top: 5em;
+        padding-bottom: .5em;
+        text-align: center;
+        font-size: 1.5em;
+    }
+    h2 {
+        padding-top: .1em;
+    }
+    .gallery .col-sm-12 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2em;
+    }
+    .pictures {
+        width: 90vw;
+    }
+}
