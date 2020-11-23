@@ -16,7 +16,7 @@ body {
 main {
     height: 100vh;
 }
-/* text css */
+/* text and font css */
 a {
     font-size: 1em;
     color: white;
@@ -43,6 +43,7 @@ p {
 .paragraph {
     padding: 4em;
     color: white;
+    width: 95vw;
 }
 
 h1 {
