@@ -5,60 +5,82 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Veradigm-jasonmanning27</title>
-
-      
         
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <script src="myscripts.js"></script>
-        <!-- <script type="text/javascript">
-            // Define an array of doctors.  Could be expanded or replaced by a dataset. 
+        <!-- <script src="myscripts.js"></script> -->
+        <script type="text/javascript">
+            // Define an array of doctors.  Could be expanded or replaced by a dyanmic dataset. 
             var doctorsArray =[
-                    {id:1, name: 'Dr. Alex', specialty: 'orthopedic', location: "New York", rating:5},
-                    {id:2, name: 'Dr. Ben', specialty: 'pediatric', location: "Vermont", rating:5},
-                    {id:3, name: 'Dr. Cal', specialty: 'orthopedic', location: "Texas", rating:4},
-                    {id:4, name: 'Dr. Dan', specialty: 'orthopedic', location: "Virginia", rating:2},
-                    {id:5, name: 'Dr. Ed', specialty: 'pediatric', location: "North Carolina", rating:3},
-                    {id:6, name: 'Dr. Frank', specialty: 'orthopedic', location: "Oregon", rating:5},
-                    {id:7, name: 'Dr. Gerald', specialty: 'pediatric', location: "Arizona", rating:4},
-                    {id:8, name: 'Dr. Hank', specialty: 'orthopedic', location: "California", rating:1}
+                    {id:1, name: 'Dr. Alex', specialty: 'orthopedic', location: "New York", rating:4.9},
+                    {id:2, name: 'Dr. Ben', specialty: 'pediatric', location: "Vermont", rating:4.6},
+                    {id:3, name: 'Dr. Cal', specialty: 'orthopedic', location: "Texas", rating:4.3},
+                    {id:4, name: 'Dr. Dan', specialty: 'orthopedic', location: "Virginia", rating:2.9},
+                    {id:5, name: 'Dr. Ed', specialty: 'pediatric', location: "North Carolina", rating:3.7},
+                    {id:6, name: 'Dr. Frank', specialty: 'orthopedic', location: "Oregon", rating:4.2},
+                    {id:7, name: 'Dr. Grace', specialty: 'pediatric', location: "Arizona", rating:2.8},
+                    {id:8, name: 'Dr. Hank', specialty: 'orthopedic', location: "California", rating:3.7},
+                    {id:9, name: 'Dr. Irna', specialty: 'orthopedic', location: "Rhode Island", rating:4.1},
+                    {id:10, name: 'Dr. Jill', specialty: 'orthopedic', location: "California", rating:4.2},
+                    {id:11, name: 'Dr. Kate', specialty: 'orthopedic', location: "New York", rating:5},
+                    {id:12, name: 'Dr. Lucy', specialty: 'pediatric', location: "Vermont", rating:4.0},
+                    {id:13, name: 'Dr. Matthew', specialty: 'orthopedic', location: "Arkansas", rating:4.3},
+                    {id:14, name: 'Dr. Nick', specialty: 'orthopedic', location: "Virginia", rating:2.3},
+                    {id:15, name: 'Dr. Oscar', specialty: 'pediatric', location: "North Carolina", rating:3.9},
+                    {id:16, name: 'Dr. Penny', specialty: 'orthopedic', location: "North Carolina", rating:4.4},
+                    {id:17, name: 'Dr. Quinn', specialty: 'pediatric', location: "Arizona", rating:4.1},
+                    {id:18, name: 'Dr. Rachel', specialty: 'orthopedic', location: "Georgia", rating:3.7}
                 ]
 
+            // On menu change, load table based on doctor entries.
             $(document).ready(function() {
                 $('#doctorsList').on('change', function() {
-            
-                    var x = this.value;
-
-                var html = "</br><div> Doctors with the same specialty are shown below and sorted by rating.<br> </div>";
                 
+                var x = this.value;
+                var name = doctorsArray[x-1].name;
+                var specialty = doctorsArray[x-1].specialty;
+                
+                var html = "</br><div> Doctors with the same specialty are shown below and sorted by rating.<br> </div>";
                 html += '<table id="table" border = 1|1>';
                 html += "<tr> <td>NAME</td> <td>SPECIALTY</td><td>LOCATION</TD> <td>RATING/5</td> </tr>";
-        
-                //alert("value: " + x);
-                doctorsArray.sort(function(a,b) { return b.rating - a.rating });
 
+                var doctorsCopy = [];
                 for(var i=0; i<doctorsArray.length; i++) {
+                    doctorsCopy[i] = doctorsArray[i];
+                } 
+                doctorsCopy.sort(function(a,b) { return b.rating - a.rating });     // Sort copy of array by rating
 
-                   
-                    if(doctorsArray[x-1].specialty == doctorsArray[i].specialty) {
+                for(var i=0; i<doctorsCopy.length; i++) {
+    
+                    if(specialty === doctorsCopy[i].specialty) {
+                         // Initialize table row
                         html+= '<tr';
-                        if(doctorsArray[x-1].id==doctorsArray[i].id) {
-                            html += ' id="highlight"'
+                        if(x==doctorsCopy[i].id) {
+                            html += ' id="highlight"';
                         }
                         html+='>';
-                        html+= '<td>' + doctorsArray[i].name; + '</td>';
-                        html+= '<td>' + doctorsArray[i].specialty; + '</td>';
-                        html+= '<td>' + doctorsArray[i].location; + '</td>';
-                        html+= '<td>' + doctorsArray[i].rating; + '</td>';
+                        // populate table row
+                        html+= '<td>' + doctorsCopy[i].name + '</td>';
+                        html+= '<td>' + doctorsCopy[i].specialty; + '</td>';
+                        html+= '<td>' + doctorsCopy[i].location; + '</td>';
+                        html+= '<td>' + doctorsCopy[i].rating; + '</td>';
                         html+= '</tr>';
                     }
                 }
                 html+= '</table>';
-                document.getElementById("tableHolder").innerHTML = html; 
+                document.getElementById("tableHolder").innerHTML = html; // add html to tableHolder div. 
+              
                 });
             });
 
+            // Load dropdown menu from doctorsArray once.
+            var load = false;
             function displayOptions() {
-                var html = "";
+                if(load) {
+                    return;
+                } else {
+                    load = true;
+                }
+                var html = '<option value="none" selected disabled hidden>Select a doctor</option>';
                 for(var i=0; i<doctorsArray.length; i++) {
                     html+= '<option value="'+doctorsArray[i].id+'">';
                     html+= doctorsArray[i].name;
@@ -68,8 +90,9 @@
                 }
                 document.getElementById("doctorsList").innerHTML = html;
             }
-        </script> -->
+        </script>
 
+        <!-- HTML for page. Most of the page is populated dynamically by JS above-->
         <body style="font-family: sans-serif">
             <div id="header">
                 <h2>Veradigm Takehome Assignment - Doctors Table</h2>
@@ -78,13 +101,14 @@
            
             <label id='label'>Pick from the list of doctors below: </br></label>
            
-            <select id="doctorsList" onclick="displayOptions()">
+            <select id="doctorsList" onmouseenter="displayOptions()">
                 <option value="none" selected disabled hidden>Select a doctor</option>
             </select>
             
             <div id='tableHolder'></div>
-        
-            <style>
+            <div id='debugger'></div>
+            <!-- Short CSS to Style page-->
+            <style> 
                 #table {
                     font-size: large;
                 }
