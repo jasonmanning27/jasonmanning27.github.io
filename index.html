@@ -1,68 +1,107 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Veradigm-jasonmanning27</title>
 
-<head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>Darkside Final Project</title>
+      
+        
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script src="myscripts.js"></script>
+        <!-- <script type="text/javascript">
+            // Define an array of doctors.  Could be expanded or replaced by a dataset. 
+            var doctorsArray =[
+                    {id:1, name: 'Dr. Alex', specialty: 'orthopedic', location: "New York", rating:5},
+                    {id:2, name: 'Dr. Ben', specialty: 'pediatric', location: "Vermont", rating:5},
+                    {id:3, name: 'Dr. Cal', specialty: 'orthopedic', location: "Texas", rating:4},
+                    {id:4, name: 'Dr. Dan', specialty: 'orthopedic', location: "Virginia", rating:2},
+                    {id:5, name: 'Dr. Ed', specialty: 'pediatric', location: "North Carolina", rating:3},
+                    {id:6, name: 'Dr. Frank', specialty: 'orthopedic', location: "Oregon", rating:5},
+                    {id:7, name: 'Dr. Gerald', specialty: 'pediatric', location: "Arizona", rating:4},
+                    {id:8, name: 'Dr. Hank', specialty: 'orthopedic', location: "California", rating:1}
+                ]
 
-  <!-- Link to Bootstrap 4 CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+            $(document).ready(function() {
+                $('#doctorsList').on('change', function() {
+            
+                    var x = this.value;
 
-  <!-- any Google fonts you use go here -->
-  <link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet">
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400&display=swap" rel="stylesheet">
+                var html = "</br><div> Doctors with the same specialty are shown below and sorted by rating.<br> </div>";
+                
+                html += '<table id="table" border = 1|1>';
+                html += "<tr> <td>NAME</td> <td>SPECIALTY</td><td>LOCATION</TD> <td>RATING/5</td> </tr>";
+        
+                //alert("value: " + x);
+                doctorsArray.sort(function(a,b) { return b.rating - a.rating });
 
-  <!-- FontAwesome for icons -->
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+                for(var i=0; i<doctorsArray.length; i++) {
 
-  <!-- Link to your custom stylesheet. Any non-Bootstrap styles you create go in this stylesheet. You can create new classes and IDs, or add new rules for classes that already exist in Bootstrap. Any rules you put in your custom stylesheet will override any styling applied to any elements of the same name in Bootstrap, as long as your custom stylesheet link comes AFTER the link to the Bootstrap CSS, the way it does here. -->
-  <link rel="stylesheet" type="text/css" href="styles.css">
+                   
+                    if(doctorsArray[x-1].specialty == doctorsArray[i].specialty) {
+                        html+= '<tr';
+                        if(doctorsArray[x-1].id==doctorsArray[i].id) {
+                            html += ' id="highlight"'
+                        }
+                        html+='>';
+                        html+= '<td>' + doctorsArray[i].name; + '</td>';
+                        html+= '<td>' + doctorsArray[i].specialty; + '</td>';
+                        html+= '<td>' + doctorsArray[i].location; + '</td>';
+                        html+= '<td>' + doctorsArray[i].rating; + '</td>';
+                        html+= '</tr>';
+                    }
+                }
+                html+= '</table>';
+                document.getElementById("tableHolder").innerHTML = html; 
+                });
+            });
 
-</head>
+            function displayOptions() {
+                var html = "";
+                for(var i=0; i<doctorsArray.length; i++) {
+                    html+= '<option value="'+doctorsArray[i].id+'">';
+                    html+= doctorsArray[i].name;
+                    html+= ' - ';
+                    html+= doctorsArray[i].specialty;
+                    html+= '</option>';
+                }
+                document.getElementById("doctorsList").innerHTML = html;
+            }
+        </script> -->
 
-<body>
-<!-- .container/.container-fluid, rows columns, content -->
+        <body style="font-family: sans-serif">
+            <div id="header">
+                <h2>Veradigm Takehome Assignment - Doctors Table</h2>
+                <h3>by Jason Manning</h3>
+            </div>
+           
+            <label id='label'>Pick from the list of doctors below: </br></label>
+           
+            <select id="doctorsList" onclick="displayOptions()">
+                <option value="none" selected disabled hidden>Select a doctor</option>
+            </select>
+            
+            <div id='tableHolder'></div>
+        
+            <style>
+                #table {
+                    font-size: large;
+                }
+                #header {
+                    background-color: lightgray;
+                }
+                h3 {
+                    font-weight: lighter;
+                }
+                #highlight {
+                    background-color: lightskyblue;
+                }
+                td {
+                    padding: 5px;
+                }
+            </style>
+        </body>
 
-  <header class = "nav">
-    <div class = "container-fluid">
-      <div class = "row">
-          <div class = "col-sm-12">
-              <nav class="navbar navbar-expand-sm navbar-dark">
-              <button class = "navbar-toggler" type = "button" data-toggle="collapse" data-target="#nav-content" aria-controls="nav-content" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class = "navbar-toggler-icon"></span>
-              </button>
-              <div class="collapse navbar-collapse" id="nav-content">
-                <ul class="navbar-nav ml-auto">
-                  <li class="nav-item"><a class="nav-link" href = "index.html">home</a></li>
-                  <li class="nav-item"><a class="nav-link" href = "media.html">media</a></li>
-                  <li class="nav-item"><a class="nav-link" href = "https://www.discstore.com/ultimate-frisbee/club-ultimate/darkside-ultimate">merch</a></li>
-                  <li class="nav-item"><a class="nav-link" href = "contact.html">contact</a></li>          
-                  <li class="nav-item"><a class="nav-link" href = "about.html">about</a></li>         
-                </ul>
-              </div>
-          </nav>
-          </div>
-      </div>
-    </div>
-  </header>
-
-  <main>
-    <div class = "container-fluid">
-      <div class = "row">
-        <div class = "col-sm-12">
-          <div class="background"></div>
-        </div>
-      </div>
-    </div>
-  </main>
-  
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
-
-</body>
-
+    </head>
 </html>
